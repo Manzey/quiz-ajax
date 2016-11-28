@@ -1,0 +1,31 @@
+#mainboard {
+    border-radius: 60px 60px 60px 60px;
+    -moz-border-radius: 60px 60px 60px 60px;
+    -webkit-border-radius: 60px 60px 60px 60px;
+    border: 10px dotted #2cd13f;
+
+    background: #637336;
+    width: 1000px;
+    height: 300px;
+}
+
+#question {
+    color: white;
+    font-size: 29px;
+    font-family: 'Tillana', cursive;
+    width: 70%;
+    height: 50px;
+    margin: 0 auto;
+    margin-top: 50px;
+}
+
+#answer {
+    color: black;
+    font-size: 29px;
+    font-family: 'Tillana', cursive;
+    background: #2cd13f;
+    width: 70%;
+    height: 50px;
+    margin: 0 auto;
+    margin-top: 5px;
+}
