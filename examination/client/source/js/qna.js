@@ -3,6 +3,10 @@
  */
 
 module.exports = function Qna() {
-  var board1 = document.querySelector("board1");
-  board1.createTextNode("Question 1");
+    var question = document.getElementById("question");
+    var answer = document.getElementById("answer");
+    var contentQ = document.createTextNode("Test");
+    var contentA = document.createTextNode("TestA");
+    question.appendChild(contentQ);
+    answer.appendChild(contentA);
 };
