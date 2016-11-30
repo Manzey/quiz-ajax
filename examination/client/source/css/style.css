@@ -29,3 +29,23 @@
     margin: 0 auto;
     margin-top: 5px;
 }
+
+#answerfield {
+    padding-top: 8px;
+    height: 70%;
+    width:  81%;
+    font-size: 30px;
+    font-family: 'Tillana', cursive;
+
+}
+
+#submit {
+    color: white;
+    background-color: #2cd13f;
+    text-align: center;
+    font-size: 13px;
+    position: inherit;
+    height: 80%;
+    width: 20%;
+
+}

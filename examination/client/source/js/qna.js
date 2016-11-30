@@ -3,36 +3,35 @@
  */
 
 module.exports = function Qna() {
-    var question = document.getElementById("question");
-    var answer = document.getElementById("answer");
+        var xmlhttp;
+        var url = "http://vhost3.lnu.se:20080/question/1";
+        var submit = document.getElementById("submit");
+        var answer = document.getElementById("answer");
+        var callback = function(json) {
+                    var theObj = JSON.parse(json);
+                    var question = document.getElementById("question");
+                    var contentQ = document.createTextNode(theObj.question);
+                    //var contentA = document.createTextNode("TestA");
+                    question.appendChild(contentQ);
+                    //answer.appendChild(contentA);
+                    submit.addEventListener("click", function() {
+                        var answer = "two";
+                        xmlhttp.open("POST", theObj.nextURL, true);
+                        xmlhttp.send(JSON.stringify(answer));
+                    })
+                };
 
-    htmlQna({method: "get", url: "http://vhost3.lnu.se:20080/question/1"}, function(error, response) {
-        if (error) {
-            throw new Error("Network error " + error)
-        }
 
-        console.log(response);
-        //CONTINUE TRYING TO RETURN THE VALUES
-    });
 
-    var contentQ = document.createTextNode(this.test);
-    var contentA = document.createTextNode("TestA");
-    question.appendChild(contentQ);
-    answer.appendChild(contentA);
-};
+        xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
+                callback(xmlhttp.responseText);
+            }
+        };
 
-function htmlQna(config, callback) {
-    var req = new XMLHttpRequest();
-    req.addEventListener("load", function() {
-        if (req.status >= 400) {
-            callback(req.status);
-        }
-
-        callback(null, req.responseText);
-    });
-
-    req.open(config.method, config.url);
-    req.send();
-}
-
+        xmlhttp.open("GET", url, true);
+        xmlhttp.send();
+        //}
+    };
 
