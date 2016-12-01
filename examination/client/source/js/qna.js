@@ -6,18 +6,19 @@ module.exports = function Qna() {
         var xmlhttp = new XMLHttpRequest();
         var url = "http://vhost3.lnu.se:20080/question/1";
         var submit = document.getElementById("submit");
-        var next = document.getElementById("submit");
-        var answer = document.getElementById("answer");
+        var next = document.getElementById("next");
         var answerfield = document.getElementById("answerfield");
         var question = document.getElementById("question");
+        var contentQ = document.getElementById("text");
+
         var callback = function(json) {
 
                         var theObj = JSON.parse(json);
-
-                        if (theObj.id === 1) {url = "http://vhost3.lnu.se:20080/question/1"}
-                        else {url = theObj.nextURL;}
-
-                        var contentQ = document.createTextNode(theObj.question);
+                        if (theObj.question === undefined) {contentQ.innerHTML = "Good job! - Click next question to continue!"
+                        } else {
+                            contentQ.innerHTML = theObj.question;
+                        }
+                        //var contentQ = document.createTextNode(theObj.question);
                         question.appendChild(contentQ);
 
                         console.log(theObj);
@@ -28,13 +29,17 @@ module.exports = function Qna() {
                             xmlhttp.setRequestHeader("Content-Type", "application/json");
                             xmlhttp.send(JSON.stringify({answer: ans}));
                             console.log(JSON.stringify(ans));
+                            contentQ.innerHTML = "Wrong answer, you lose!";
                         });
 
                         next.addEventListener("click", function() {
                             var nextObj = JSON.parse(json);
                             url = nextObj.nextURL;
+                            xmlhttp.open("GET", url, true);
+                            xmlhttp.send();
                             contentQ.innerHTML = nextObj.question;
-                            console.log("test" + nextObj);
+                            question.appendChild(contentQ);
+                            console.log(nextObj);
 
                         });
 
@@ -47,6 +52,7 @@ module.exports = function Qna() {
         };
 
         xmlhttp.open("GET", url, true);
+
         xmlhttp.send();
     };
 
