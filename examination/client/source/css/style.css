@@ -36,10 +36,9 @@
     width:  81%;
     font-size: 30px;
     font-family: 'Tillana', cursive;
-
 }
 
-#submit {
+#submit, #next {
     color: white;
     background-color: #2cd13f;
     text-align: center;
@@ -48,4 +47,8 @@
     height: 80%;
     width: 20%;
 
+}
+
+#victory {
+    float: right;
 }
