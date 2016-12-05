@@ -11,6 +11,7 @@ module.exports = function Qna() {
         var question = document.getElementById("question");
         var contentQ = document.getElementById("text");
         var answertype = document.getElementById("answertype");
+        var form = document.getElementById("answertype");
 
         var callback = function(json) {
 
@@ -24,31 +25,36 @@ module.exports = function Qna() {
                         console.log(theObj);
 
                         if (theObj.alternatives) {
-                            console.log(Object.keys(theObj.alternatives).length);
-                            var newList = document.createElement("LI");
-                            newList.appendChild(answerfield);
-                            answerfield.setAttribute("id", "answerfield");
-                            answerfield.setAttribute("type", "radio");
-                            answerfield.setAttribute("value", "alt1");
-                            answertype.appendChild(answerfield);
-                            answerfield.insertAdjacentHTML('beforeBegin', theObj.alternatives.alt1);
-                        } else {
+
+                            var i = -1;
+                            for (var alt in theObj.alternatives) {
+                                i += 1;
+                                var newRadio = document.createElement("INPUT");
+                                newRadio.type = "radio";
+                                newRadio.value = Object.keys(theObj.alternatives)[i];
+                                newRadio.id = "answerfield2";
+                                console.log(Object.keys(theObj.alternatives));
+                                newRadio.name = "alts";
+                                var value = document.createTextNode(theObj.alternatives[alt]);
+                                form.appendChild(value);
+                                form.appendChild(newRadio);
+
+                                answerfield.style.display = "none"; }
 
                         }
 
                         submit.addEventListener("click", function() {
-                            try {
-                                var ans = answerfield.value;
-                                xmlhttp.open("POST", theObj.nextURL, true);
-                                xmlhttp.setRequestHeader("Content-Type", "application/json");
-                                xmlhttp.send(JSON.stringify({answer: ans}));
-                                console.log(JSON.stringify(ans));
+                            var ans = "Something went wrong!";
+                            if (theObj.alternatives)
+                            {ans = document.querySelector("input[name=\"alts\"]:checked").value} else {
+                                ans = answerfield.value;}
 
-                            }
-                            catch (e) {
-                                contentQ.innerHTML = "Wrong answer, you lose!";
-                                console.log("Swag:" + e);
-                            }
+                            xmlhttp.open("POST", theObj.nextURL, true);
+                            xmlhttp.setRequestHeader("Content-Type", "application/json");
+                            xmlhttp.send(JSON.stringify({answer: ans}));
+                            console.log(JSON.stringify(ans));
+
+                            contentQ.innerHTML = "Wrong answer, you lose!";
                         });
 
                         next.addEventListener("click", function() {
@@ -59,7 +65,11 @@ module.exports = function Qna() {
                             question.appendChild(contentQ);
                             answerfield.value = "";
                             console.log(nextObj);
+                            var alts = document.getElementById("answerfield2");
+                            alts.parentNode.removeChild(alts);
 
+                            if (theObj.alternatives) {answerfield.style.display = "none";}
+                            else {answerfield.style.display = "inline"}
                         });
 
                     };
