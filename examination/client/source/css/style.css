@@ -16,26 +16,24 @@
     width: 70%;
     height: 50px;
     margin: 0 auto;
-    margin-top: 50px;
+    margin-top: 10px;
 }
 
 #answer {
-    color: black;
+    color: white;
     font-size: 29px;
     font-family: 'Tillana', cursive;
-    background: #2cd13f;
     width: 70%;
     height: 50px;
     margin: 0 auto;
-    margin-top: 5px;
+    margin-top: 50px;
 }
 
 #answerfield {
-    padding-top: 8px;
-    height: 70%;
     width:  81%;
     font-size: 30px;
     font-family: 'Tillana', cursive;
+
 }
 
 #submit, #next {
@@ -51,4 +49,8 @@
 
 #victory {
     float: right;
+}
+
+form {
+
 }
