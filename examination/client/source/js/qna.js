@@ -12,6 +12,7 @@ module.exports = function Qna() {
         var contentQ = document.getElementById("text");
         var answertype = document.getElementById("answertype");
         var form = document.getElementById("answertype");
+        var temp = document.getElementById("temp");
 
         var callback = function(json) {
 
@@ -36,10 +37,10 @@ module.exports = function Qna() {
                                 console.log(Object.keys(theObj.alternatives));
                                 newRadio.name = "alts";
                                 var value = document.createTextNode(theObj.alternatives[alt]);
-                                form.appendChild(value);
-                                form.appendChild(newRadio);
+                                temp.appendChild(value);
+                                temp.appendChild(newRadio);
 
-                                answerfield.style.display = "none"; }
+                                answerfield.style.display = "none";}
 
                         }
 
@@ -67,7 +68,7 @@ module.exports = function Qna() {
                             console.log(nextObj);
                             var alts = document.getElementById("answerfield2");
                             alts.parentNode.removeChild(alts);
-
+                            temp.innerHTML = "";
                             if (theObj.alternatives) {answerfield.style.display = "none";}
                             else {answerfield.style.display = "inline"}
                         });
