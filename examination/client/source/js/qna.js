@@ -59,7 +59,7 @@ module.exports = function Qna() {
                             nickname = nicknamefield.value;
                             nicknameboard.style.display = "none";
                             mainboard.style.display = "block";
-
+                            countdown();
                         });
 
                         submit.addEventListener("click", function() {
@@ -84,6 +84,7 @@ module.exports = function Qna() {
                             question.appendChild(contentQ);
                             answerfield.value = "";
                             console.log(nextObj);
+
                             var alts = document.getElementById("answerfield2");
                             alts.parentNode.removeChild(alts);
                             temp.innerHTML = "";
@@ -102,5 +103,27 @@ module.exports = function Qna() {
         xmlhttp.open("GET", url, true);
 
         xmlhttp.send();
+
+
+    //Found a simple timer
+        var seconds;
+        var temp1;
+        function countdown() {
+
+            seconds = document.getElementById("countdown").innerHTML;
+            seconds = parseInt(seconds, 10);
+
+            if (seconds === 1) {
+                temp1 = document.getElementById("countdown");
+                temp1.innerHTML = "0";
+                return;
+            }
+
+            seconds -= 1;
+            temp1 = document.getElementById("countdown");
+            temp1.innerHTML = seconds;
+            timeoutMyOswego = setTimeout(countdown, 1000);
+        }
+
     };
 
