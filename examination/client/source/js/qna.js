@@ -10,18 +10,26 @@ module.exports = function Qna() {
         var answerfield = document.getElementById("answerfield");
         var question = document.getElementById("question");
         var contentQ = document.getElementById("text");
-        var answertype = document.getElementById("answertype");
-        var form = document.getElementById("answertype");
         var temp = document.getElementById("temp");
+        var begin = document.getElementById("begin");
+        var nickname = "No nickname entered";
+        var mainboard = document.getElementById("mainboard");
+        var highscoreboard = document.getElementById("highscoreboard");
 
         var callback = function(json) {
-
                         var theObj = JSON.parse(json);
-                        if (theObj.question === undefined) {contentQ.innerHTML = "Good job! - Click next question to continue!"
+
+                        if (theObj.nextURL === undefined) {
+                            mainboard.style.display = "none";
+                            highscoreboard.style.display = "block";
+                        }
+
+                        if (theObj.question === undefined) {
+                            contentQ.innerHTML = "Good job! - Click next question to continue!";
                         } else {
                             contentQ.innerHTML = theObj.question;
                         }
-                        //var contentQ = document.createTextNode(theObj.question);
+
                         question.appendChild(contentQ);
                         console.log(theObj);
 
@@ -40,9 +48,19 @@ module.exports = function Qna() {
                                 temp.appendChild(value);
                                 temp.appendChild(newRadio);
 
-                                answerfield.style.display = "none";}
+                                answerfield.style.display = "none";
+                            }
 
                         }
+
+                        begin.addEventListener("click", function() {
+                            var nicknamefield = document.getElementById("nicknamefield");
+                            var nicknameboard = document.getElementById("nicknameboard");
+                            nickname = nicknamefield.value;
+                            nicknameboard.style.display = "none";
+                            mainboard.style.display = "block";
+
+                        });
 
                         submit.addEventListener("click", function() {
                             var ans = "Something went wrong!";

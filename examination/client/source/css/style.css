@@ -1,14 +1,21 @@
-#mainboard {
+#mainboard, #nicknameboard, #highscoreboard {
     border-radius: 60px 60px 60px 60px;
     -moz-border-radius: 60px 60px 60px 60px;
     -webkit-border-radius: 60px 60px 60px 60px;
     border: 10px dotted #2cd13f;
-
     background: #637336;
     width: 1000px;
     height: 360px;
+
 }
 
+#highscoreboard {
+    display: none;
+}
+
+#mainboard {
+    display: none;
+}
 #question {
     color: white;
     font-size: 29px;
@@ -19,7 +26,7 @@
     margin-top: 10px;
 }
 
-#answer {
+#answer, #nickname, #highscore {
     color: white;
     font-size: 29px;
     font-family: 'Tillana', cursive;
@@ -29,14 +36,14 @@
     margin-top: 50px;
 }
 
-#answerfield {
+#answerfield, #nicknamefield {
 
     font-size: 30px;
     font-family: 'Tillana', cursive;
 
 }
 
-#submit, #next {
+#submit, #next, #begin {
     color: white;
     background-color: #2cd13f;
     text-align: center;
