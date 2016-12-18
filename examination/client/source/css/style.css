@@ -1,4 +1,4 @@
-#mainboard, #nicknameboard, #highscoreboard {
+#mainboard, #nicknameboard, #highscoreboard, #loserboard {
     border-radius: 60px 60px 60px 60px;
     -moz-border-radius: 60px 60px 60px 60px;
     -webkit-border-radius: 60px 60px 60px 60px;
@@ -9,11 +9,11 @@
 
 }
 
-#highscoreboard {
+#loserboard {
     display: none;
 }
 
-#mainboard {
+#highscoreboard, #mainboard {
     display: none;
 }
 #question {
@@ -43,6 +43,13 @@
 
 }
 
+#losertext {
+    font-size: 100px;
+    font-family: 'Tillana', cursive;
+    color: white;
+    text-align: center;
+}
+
 #submit, #next, #begin {
     color: white;
     background-color: #2cd13f;
@@ -51,13 +58,19 @@
     position: inherit;
     height: 80%;
     width: 20%;
-
 }
 
 #victory {
     float: right;
 }
 
-form {
-
+#countdown {
+ float: right;
+ margin-right: 45px;
+ margin-top: 20px;
+ color: white;
+ font-size: 29px;
+ font-family: 'Tillana', cursive;
+ border-radius: 5px 5px 5px 5px;
 }
+

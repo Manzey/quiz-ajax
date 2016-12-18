@@ -2,7 +2,10 @@
  * Created by manze on 2016-11-28.
  */
 
+var Timer = require("./timer.js");
+
 module.exports = function Qna() {
+        this.countdown = "No timer set";
         var xmlhttp = new XMLHttpRequest();
         var url = "http://vhost3.lnu.se:20080/question/1";
         var submit = document.getElementById("submit");
@@ -29,6 +32,8 @@ module.exports = function Qna() {
                         } else {
                             contentQ.innerHTML = theObj.question;
                         }
+
+
 
                         question.appendChild(contentQ);
                         console.log(theObj);
@@ -59,7 +64,7 @@ module.exports = function Qna() {
                             nickname = nicknamefield.value;
                             nicknameboard.style.display = "none";
                             mainboard.style.display = "block";
-                            countdown();
+                            this.countdown = new Timer();
                         });
 
                         submit.addEventListener("click", function() {
@@ -72,8 +77,7 @@ module.exports = function Qna() {
                             xmlhttp.setRequestHeader("Content-Type", "application/json");
                             xmlhttp.send(JSON.stringify({answer: ans}));
                             console.log(JSON.stringify(ans));
-
-                            contentQ.innerHTML = "Wrong answer, you lose!";
+                            contentQ.innerHTML = false;
                         });
 
                         next.addEventListener("click", function() {
@@ -94,36 +98,20 @@ module.exports = function Qna() {
 
                     };
 
+
+
         xmlhttp.onreadystatechange = function() {
             if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
                 callback(xmlhttp.responseText);
+            }
+            if (xmlhttp.status == 400) {
+                mainboard.style.display = "none";
+                document.querySelector("#loserboard").style.display = "block";
             }
         };
 
         xmlhttp.open("GET", url, true);
 
         xmlhttp.send();
-
-
-    //Found a simple timer
-        var seconds;
-        var temp1;
-        function countdown() {
-
-            seconds = document.getElementById("countdown").innerHTML;
-            seconds = parseInt(seconds, 10);
-
-            if (seconds === 1) {
-                temp1 = document.getElementById("countdown");
-                temp1.innerHTML = "0";
-                return;
-            }
-
-            seconds -= 1;
-            temp1 = document.getElementById("countdown");
-            temp1.innerHTML = seconds;
-            timeoutMyOswego = setTimeout(countdown, 1000);
-        }
-
     };
 
