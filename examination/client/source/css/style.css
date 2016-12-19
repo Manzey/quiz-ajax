@@ -9,7 +9,7 @@
 
 }
 
-#loserboard {
+#loserboard, #next {
     display: none;
 }
 
@@ -44,13 +44,13 @@
 }
 
 #losertext {
-    font-size: 100px;
+    font-size: 25px;
     font-family: 'Tillana', cursive;
     color: white;
     text-align: center;
 }
 
-#submit, #next, #begin {
+#submit, #next, #begin, #redo {
     color: white;
     background-color: #2cd13f;
     text-align: center;
@@ -58,6 +58,13 @@
     position: inherit;
     height: 80%;
     width: 20%;
+}
+
+
+
+#redo {
+    height: 10%;
+    margin-left: 350px;
 }
 
 #victory {

@@ -5,7 +5,7 @@
 var Timer = require("./timer.js");
 
 module.exports = function Qna() {
-        this.countdown = "No timer set";
+        var countdown = new Timer();
         var xmlhttp = new XMLHttpRequest();
         var url = "http://vhost3.lnu.se:20080/question/1";
         var submit = document.getElementById("submit");
@@ -64,10 +64,11 @@ module.exports = function Qna() {
                             nickname = nicknamefield.value;
                             nicknameboard.style.display = "none";
                             mainboard.style.display = "block";
-                            this.countdown = new Timer();
+                            countdown.start();
                         });
 
                         submit.addEventListener("click", function() {
+                            countdown.reset();
                             var ans = "Something went wrong!";
                             if (theObj.alternatives)
                             {ans = document.querySelector("input[name=\"alts\"]:checked").value} else {
@@ -77,10 +78,12 @@ module.exports = function Qna() {
                             xmlhttp.setRequestHeader("Content-Type", "application/json");
                             xmlhttp.send(JSON.stringify({answer: ans}));
                             console.log(JSON.stringify(ans));
-                            contentQ.innerHTML = false;
+
+                            next.style.display = "inline";
                         });
 
                         next.addEventListener("click", function() {
+                            next.style.display = "none";
                             var nextObj = JSON.parse(json);
                             xmlhttp.open("GET", nextObj.nextURL, true);
                             xmlhttp.send();
@@ -89,13 +92,14 @@ module.exports = function Qna() {
                             answerfield.value = "";
                             console.log(nextObj);
 
+                            countdown.start();
                             var alts = document.getElementById("answerfield2");
                             alts.parentNode.removeChild(alts);
                             temp.innerHTML = "";
                             if (theObj.alternatives) {answerfield.style.display = "none";}
                             else {answerfield.style.display = "inline"}
-                        });
 
+                        });
                     };
 
 
@@ -104,7 +108,7 @@ module.exports = function Qna() {
             if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
                 callback(xmlhttp.responseText);
             }
-            if (xmlhttp.status == 400) {
+            if (xmlhttp.status === 400 || xmlhttp.status === 404) {
                 mainboard.style.display = "none";
                 document.querySelector("#loserboard").style.display = "block";
             }
