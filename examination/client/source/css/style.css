@@ -4,7 +4,7 @@
     -webkit-border-radius: 60px 60px 60px 60px;
     border: 10px dotted #2cd13f;
     background: #637336;
-    width: 1000px;
+    width: 60%;
     height: 360px;
 
 }
@@ -16,29 +16,29 @@
 #highscoreboard, #mainboard {
     display: none;
 }
+
 #question {
     color: white;
-    font-size: 29px;
+    font-size: 24px;
     font-family: 'Tillana', cursive;
     width: 70%;
-    height: 50px;
+    height: 5%;
     margin: 0 auto;
     margin-top: 10px;
 }
 
 #answer, #nickname, #highscore {
     color: white;
-    font-size: 29px;
+    font-size: 24px;
     font-family: 'Tillana', cursive;
     width: 70%;
-    height: 50px;
+    height: 15%;
     margin: 0 auto;
-    margin-top: 50px;
+    margin-top: 7%;
 }
 
 #answerfield, #nicknamefield {
-
-    font-size: 30px;
+    font-size: 24px;
     font-family: 'Tillana', cursive;
 
 }
@@ -73,11 +73,16 @@
 
 #countdown {
  float: right;
- margin-right: 45px;
- margin-top: 20px;
+ margin-right: 10%;
+ margin-top: 5%;
  color: white;
  font-size: 29px;
  font-family: 'Tillana', cursive;
  border-radius: 5px 5px 5px 5px;
+}
+
+ol, li{
+    font-size: 20px;
+    margin-left: 10%;
 }
 

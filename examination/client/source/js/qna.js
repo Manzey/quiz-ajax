@@ -3,9 +3,11 @@
  */
 
 var Timer = require("./timer.js");
+var Highscore = require("./highscore.js");
 
 module.exports = function Qna() {
         var countdown = new Timer();
+        var hsCountdown = new Highscore();
         var xmlhttp = new XMLHttpRequest();
         var url = "http://vhost3.lnu.se:20080/question/1";
         var submit = document.getElementById("submit");
@@ -25,6 +27,7 @@ module.exports = function Qna() {
                         if (theObj.nextURL === undefined) {
                             mainboard.style.display = "none";
                             highscoreboard.style.display = "block";
+                            hsCountdown.timerStop();
                         }
 
                         if (theObj.question === undefined) {
@@ -65,6 +68,7 @@ module.exports = function Qna() {
                             nicknameboard.style.display = "none";
                             mainboard.style.display = "block";
                             countdown.start();
+                            hsCountdown.timerGo();
                         });
 
                         submit.addEventListener("click", function() {
@@ -93,10 +97,11 @@ module.exports = function Qna() {
                             console.log(nextObj);
 
                             countdown.start();
+                            if (theObj.alternatives) {
                             var alts = document.getElementById("answerfield2");
                             alts.parentNode.removeChild(alts);
                             temp.innerHTML = "";
-                            if (theObj.alternatives) {answerfield.style.display = "none";}
+                            answerfield.style.display = "none";}
                             else {answerfield.style.display = "inline"}
 
                         });
@@ -111,6 +116,7 @@ module.exports = function Qna() {
             if (xmlhttp.status === 400 || xmlhttp.status === 404) {
                 mainboard.style.display = "none";
                 document.querySelector("#loserboard").style.display = "block";
+                hsCountdown.timerStop();
             }
         };
 

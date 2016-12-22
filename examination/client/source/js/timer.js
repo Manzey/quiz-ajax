@@ -2,9 +2,10 @@
  * Created by manze on 2016-12-07.
  */
 
-//Used window cause this was causing some errors and bugs, making the timers overlap eachother and not stop properly.
+//Used window cause this was causing some errors and bugs, making the timers overlap each other and not stop properly.
+//I realize it bad practice to use window for fully global variables, but it was the only solution I could think of.
+
 var Timer = function() {
-    window.ccount = 20;
 };
 
 Timer.prototype.start = function() {
@@ -29,6 +30,7 @@ Timer.prototype.pause = function() {
 Timer.prototype.reset = function() {
     clearInterval(window.counter);
     document.querySelector("#countdown").innerHTML = 20;
+    window.count = 20;
 
 };
 
