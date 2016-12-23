@@ -28,6 +28,7 @@ module.exports = function Qna() {
                             mainboard.style.display = "none";
                             highscoreboard.style.display = "block";
                             hsCountdown.timerStop();
+                            hsCountdown.addScore();
                         }
 
                         if (theObj.question === undefined) {
@@ -35,8 +36,6 @@ module.exports = function Qna() {
                         } else {
                             contentQ.innerHTML = theObj.question;
                         }
-
-
 
                         question.appendChild(contentQ);
                         console.log(theObj);
@@ -62,13 +61,15 @@ module.exports = function Qna() {
                         }
 
                         begin.addEventListener("click", function() {
-                            var nicknamefield = document.getElementById("nicknamefield");
-                            var nicknameboard = document.getElementById("nicknameboard");
-                            nickname = nicknamefield.value;
-                            nicknameboard.style.display = "none";
-                            mainboard.style.display = "block";
-                            countdown.start();
-                            hsCountdown.timerGo();
+                            if (document.querySelector("#nicknamefield").value.length > 0) {
+                                var nicknamefield = document.getElementById("nicknamefield");
+                                var nicknameboard = document.getElementById("nicknameboard");
+                                nickname = nicknamefield.value;
+                                nicknameboard.style.display = "none";
+                                mainboard.style.display = "block";
+                                countdown.start();
+                                hsCountdown.timerGo();
+                            } else {document.querySelector("#nonickname").style.display = "block";}
                         });
 
                         submit.addEventListener("click", function() {
@@ -98,21 +99,21 @@ module.exports = function Qna() {
 
                             countdown.start();
                             if (theObj.alternatives) {
-                            var alts = document.getElementById("answerfield2");
-                            alts.parentNode.removeChild(alts);
-                            temp.innerHTML = "";
-                            answerfield.style.display = "none";}
+                                var alts = document.getElementById("answerfield2");
+                                alts.parentNode.removeChild(alts);
+                                temp.innerHTML = "";
+                                answerfield.style.display = "none";
+                            }
                             else {answerfield.style.display = "inline"}
 
                         });
                     };
 
-
-
         xmlhttp.onreadystatechange = function() {
             if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
                 callback(xmlhttp.responseText);
             }
+
             if (xmlhttp.status === 400 || xmlhttp.status === 404) {
                 mainboard.style.display = "none";
                 document.querySelector("#loserboard").style.display = "block";
