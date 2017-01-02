@@ -1,5 +1,5 @@
 /**
- * Created by manze on 2016-12-22.
+ * Created by manzey on 2016-12-22.
  */
 
 
@@ -11,21 +11,24 @@ var Highscore = function() {
 
 };
 
+
+//Highscore timer, which continues to run all through the quiz.
 Highscore.prototype.timerGo = function() {
     window.timer = 0;
     clearInterval(this.timer);
     this.timer = setInterval(function() {
         window.timer = window.timer + 1;
-        console.log(window.timer);
     }, 1000);
 
 };
 
 Highscore.prototype.timerStop = function() {
     clearInterval(this.timer);
-    console.log(window.timer);
 };
 
+
+//Adds the score to the highscore list, made it so it only stores 6 highscores, then it replaces the last one in the
+//list, since it is not displayed anyways, just to prevent from eventually having unlimited length on the array.
 Highscore.prototype.addScore = function() {
     var result = {nick: document.querySelector("#nicknamefield").value, time: window.timer};
     var hs = [];
@@ -48,7 +51,6 @@ Highscore.prototype.addScore = function() {
         return a.time - b.time;
     });
 
-    console.log(hsS);
     document.querySelector("#hs1").innerHTML =  hsS[0].nick + " completed in " + hsS[0].time + " seconds.";
     document.querySelector("#hs2").innerHTML =  hsS[1].nick + " completed in " + hsS[1].time + " seconds.";
     document.querySelector("#hs3").innerHTML =  hsS[2].nick + " completed in " + hsS[2].time + " seconds.";

@@ -8,6 +8,7 @@
 var Timer = function() {
 };
 
+//The timer for each question, this one also got a reset button, since it needs to reset after each question.
 Timer.prototype.start = function() {
     window.count = 20;
     clearInterval(window.counter);
